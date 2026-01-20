@@ -1,6 +1,6 @@
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
 import type { Wallpaper } from '../types';
 import { DownloadIcon, LockIcon } from './icons';
 
