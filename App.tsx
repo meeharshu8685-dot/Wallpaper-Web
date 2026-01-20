@@ -11,7 +11,6 @@ import Premium from './components/Premium';
 import About from './components/About';
 import WallpaperDetail from './components/WallpaperDetail';
 import LiveBackground from './components/LiveBackground';
-import CustomCursor from './components/CustomCursor';
 
 const App: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
@@ -22,7 +21,7 @@ const App: React.FC = () => {
   const handleSelectCategory = (category: Category | null) => {
     setSelectedCategory(category);
     setTimeout(() => {
-        wallpaperGridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      wallpaperGridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
   };
 
@@ -50,12 +49,11 @@ const App: React.FC = () => {
 
   return (
     <>
-      <CustomCursor />
       <LiveBackground mousePosition={mousePosition} />
       <div className="relative z-10 isolate min-h-screen w-full overflow-x-hidden" style={{ perspective: '1000px' }}>
         <Hero />
         <CultureStatement />
-        <Categories categories={categories} onSelectCategory={handleSelectCategory} selectedCategory={selectedCategory}/>
+        <Categories categories={categories} onSelectCategory={handleSelectCategory} selectedCategory={selectedCategory} />
         <div ref={wallpaperGridRef} className="pt-12">
           <WallpaperGrid
             key={selectedCategory?.id || 'all'}
