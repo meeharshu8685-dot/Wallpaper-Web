@@ -1,0 +1,79 @@
+
+import React from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ChevronDownIcon } from './icons';
+
+const Hero: React.FC = () => {
+  const { scrollYProgress } = useScroll();
+  const scale = useTransform(scrollYProgress, [0, 0.1], [1, 0.8]);
+  const opacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
+  const z = useTransform(scrollYProgress, [0, 0.1], [0, -500]);
+
+  const text1 = "DHH IS NOT A GENRE.";
+  const text2 = "IT'S A MOVEMENT.";
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.5, delayChildren: 0.2 },
+    },
+  };
+
+  const lineVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: 'spring', damping: 15, stiffness: 50 },
+    },
+  };
+
+  return (
+    <section className="relative flex h-screen flex-col items-center justify-center overflow-hidden">
+      {/* Animated Light Streaks */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div
+          className="absolute top-1/4 left-0 h-2 w-full bg-gradient-to-r from-transparent via-brand-red/30 to-transparent blur-2xl"
+          style={{
+            animation: 'light-streak 8s ease-in-out infinite alternate',
+            animationDelay: '0s',
+          }}
+        />
+        <div
+          className="absolute top-1/2 left-0 h-1 w-1/2 bg-gradient-to-r from-transparent via-brand-gold/20 to-transparent blur-xl"
+          style={{
+            animation: 'light-streak 12s ease-in-out infinite alternate',
+            animationDelay: '-4s',
+          }}
+        />
+      </div>
+
+      <motion.div
+        style={{ scale, opacity, translateZ: z, transformStyle: 'preserve-3d' }}
+        className="text-center"
+      >
+        <motion.h1
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="font-heading text-5xl tracking-widest text-gray-100 md:text-8xl lg:text-9xl animate-bass-vibrate"
+        >
+          <motion.div variants={lineVariants} className="whitespace-nowrap">
+            {text1}
+          </motion.div>
+          <motion.div variants={lineVariants} className="whitespace-nowrap text-brand-red">
+            {text2}
+          </motion.div>
+        </motion.h1>
+      </motion.div>
+
+      <div className="absolute bottom-10 z-20 flex flex-col items-center justify-center space-y-2 text-gray-400">
+        <span className="text-sm font-mono">ENTER THE UNIVERSE</span>
+        <ChevronDownIcon className="h-6 w-6 animate-pulse-slow" />
+      </div>
+    </section>
+  );
+};
+
+export default Hero;
