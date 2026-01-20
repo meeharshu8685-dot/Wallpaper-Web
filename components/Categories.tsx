@@ -33,7 +33,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, onSelect, isSelec
     x.set(xPct);
     y.set(yPct);
   };
-  
+
   const handleMouseLeave = () => {
     x.set(0);
     y.set(0);
@@ -50,23 +50,23 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, onSelect, isSelec
         rotateY,
         transformStyle: 'preserve-3d',
       }}
-      className={`relative col-span-1 row-span-1 cursor-pointer overflow-hidden rounded-lg shadow-lg 
+      className={`relative col-span-1 row-span-1 cursor-pointer overflow-hidden rounded-xl bg-gunmetal/20 shadow-2xl transition-all duration-500
         ${category.gridSpan === 2 ? 'md:col-span-2' : ''}
-        ${isSelected ? 'ring-2 ring-brand-red ring-offset-2 ring-offset-brand-black' : ''}`}
-      whileHover={{ scale: 1.03, y: -5 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+        ${isSelected ? 'ring-2 ring-brand-red shadow-[0_0_30px_rgba(255,0,0,0.4)]' : 'ring-1 ring-white/10'}`}
+      whileHover={{ scale: 1.02 }}
     >
       <div style={{ transform: 'translateZ(50px)', transformStyle: 'preserve-3d' }} className="absolute inset-0">
         <img
           src={category.imageUrl}
           alt={category.name}
-          className="h-full w-full object-cover"
-          style={{ filter: 'grayscale(0.5) brightness(0.6)' }}
+          className="h-full w-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-700"
+          style={{ filter: 'brightness(0.5)' }}
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-black/40 transition-colors duration-300 hover:bg-black/20"></div>
-        <div className="absolute inset-0 flex items-end p-6">
-          <h3 className="font-heading text-2xl tracking-wider text-white md:text-4xl">
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent transition-opacity duration-300 group-hover:opacity-60"></div>
+        <div className="absolute inset-0 flex flex-col justify-end p-8">
+          <span className="mb-2 font-mono text-xs tracking-tighter text-brand-red uppercase">Universe // {category.id}</span>
+          <h3 className="font-heading text-3xl tracking-tighter text-white md:text-5xl group-hover:animate-glitch">
             {category.name}
           </h3>
         </div>
@@ -84,7 +84,7 @@ interface CategoriesProps {
 const Categories: React.FC<CategoriesProps> = ({ categories, onSelectCategory, selectedCategory }) => {
   return (
     <section className="container mx-auto px-4 py-24">
-      <motion.h2 
+      <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -104,18 +104,18 @@ const Categories: React.FC<CategoriesProps> = ({ categories, onSelectCategory, s
           />
         ))}
       </div>
-       {selectedCategory && (
-            <div className="mt-12 text-center">
-                <motion.button
-                  whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(185, 28, 28, 0.6)'}}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => onSelectCategory(null)}
-                  className="font-mono text-brand-red hover:text-white transition-colors duration-300 border border-brand-red px-6 py-2 rounded-lg"
-                >
-                  Clear Filter
-                </motion.button>
-            </div>
-        )}
+      {selectedCategory && (
+        <div className="mt-12 text-center">
+          <motion.button
+            whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(185, 28, 28, 0.6)' }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => onSelectCategory(null)}
+            className="font-mono text-brand-red hover:text-white transition-colors duration-300 border border-brand-red px-6 py-2 rounded-lg"
+          >
+            Clear Filter
+          </motion.button>
+        </div>
+      )}
     </section>
   );
 };

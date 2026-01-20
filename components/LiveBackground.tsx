@@ -33,9 +33,9 @@ const Particles: React.FC<{ count: number; mousePosition: { x: number; y: number
     }
     return pos;
   }, [count, particles]);
-  
+
   const mouseVec = useMemo(() => new THREE.Vector3(), []);
-  
+
   useFrame((state, delta) => {
     const { viewport } = state;
     mouseVec.lerp({
@@ -43,7 +43,7 @@ const Particles: React.FC<{ count: number; mousePosition: { x: number; y: number
       y: -(mousePosition.y / viewport.height) * 2 + 1,
       z: 0
     }, 0.1);
-    
+
     lightRef.current.position.set(mouseVec.x * viewport.width / 2, mouseVec.y * viewport.height / 2, 2);
 
     particles.forEach((particle, i) => {
@@ -52,14 +52,14 @@ const Particles: React.FC<{ count: number; mousePosition: { x: number; y: number
       const a = Math.cos(t) + Math.sin(t * 1) / 10;
       const b = Math.sin(t) + Math.cos(t * 2) / 10;
       const s = Math.cos(t);
-      
+
       dummy.position.set(
         x + a * (factor / 5),
         y + b * (factor / 5),
         z + b * (factor / 5)
       );
-      dummy.scale.set(s,s,s);
-      dummy.rotation.set(s*5, s*5, s*5);
+      dummy.scale.set(s, s, s);
+      dummy.rotation.set(s * 5, s * 5, s * 5);
       dummy.updateMatrix();
       ref.current.geometry.attributes.position.setXYZ(i, dummy.position.x, dummy.position.y, dummy.position.z);
     });
@@ -71,14 +71,18 @@ const Particles: React.FC<{ count: number; mousePosition: { x: number; y: number
 
   return (
     <>
-      <pointLight ref={lightRef} distance={40} intensity={8} color="red" />
+      <pointLight ref={lightRef} distance={50} intensity={10} color="#ff0000" />
+      <pointLight position={[10, 10, 5]} distance={100} intensity={2} color="#ffd700" />
+      <pointLight position={[-10, -10, 5]} distance={100} intensity={2} color="#ff0000" />
       <Points ref={ref} positions={positions as any} stride={3} frustumCulled={false}>
         <PointMaterial
           transparent
           color="#ffffff"
-          size={0.02}
+          size={0.03}
           sizeAttenuation={true}
           depthWrite={false}
+          opacity={0.4}
+          blending={THREE.AdditiveBlending}
         />
       </Points>
     </>

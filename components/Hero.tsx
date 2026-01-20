@@ -31,22 +31,18 @@ const Hero: React.FC = () => {
 
   return (
     <section className="relative flex h-screen flex-col items-center justify-center overflow-hidden">
-      {/* Animated Light Streaks */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div
-          className="absolute top-1/4 left-0 h-2 w-full bg-gradient-to-r from-transparent via-brand-red/30 to-transparent blur-2xl"
-          style={{
-            animation: 'light-streak 8s ease-in-out infinite alternate',
-            animationDelay: '0s',
-          }}
-        />
-        <div
-          className="absolute top-1/2 left-0 h-1 w-1/2 bg-gradient-to-r from-transparent via-brand-gold/20 to-transparent blur-xl"
-          style={{
-            animation: 'light-streak 12s ease-in-out infinite alternate',
-            animationDelay: '-4s',
-          }}
-        />
+      <div className="pointer-events-none absolute inset-0 -z-20 overflow-hidden">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="h-full w-full object-cover opacity-40 grayscale"
+        >
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-fast-flashing-white-lights-on-black-background-31620-large.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-black via-transparent to-brand-black" />
+        <div className="scanline" />
       </div>
 
       <motion.div
@@ -57,12 +53,12 @@ const Hero: React.FC = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="font-heading text-5xl tracking-widest text-gray-100 md:text-8xl lg:text-9xl animate-bass-vibrate"
+          className="font-heading text-5xl tracking-widest text-gray-100 md:text-8xl lg:text-9xl animate-bass-scale"
         >
-          <motion.div variants={lineVariants} className="whitespace-nowrap">
+          <motion.div variants={lineVariants} className="whitespace-nowrap hover:animate-glitch select-none cursor-default">
             {text1}
           </motion.div>
-          <motion.div variants={lineVariants} className="whitespace-nowrap text-brand-red">
+          <motion.div variants={lineVariants} className="whitespace-nowrap text-brand-red animate-text-pulse select-none cursor-default">
             {text2}
           </motion.div>
         </motion.h1>
