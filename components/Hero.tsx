@@ -53,12 +53,12 @@ const Hero: React.FC = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="font-heading text-5xl tracking-widest text-gray-100 md:text-8xl lg:text-9xl animate-bass-scale"
+          className="font-heading text-6xl tracking-widest text-gray-100 md:text-8xl lg:text-9xl animate-bass-scale px-4 leading-none"
         >
-          <motion.div variants={lineVariants} className="whitespace-nowrap hover:animate-glitch select-none cursor-default">
+          <motion.div variants={lineVariants} className="hover:animate-glitch select-none cursor-default mb-4">
             {text1}
           </motion.div>
-          <motion.div variants={lineVariants} className="whitespace-nowrap text-brand-red animate-text-pulse select-none cursor-default">
+          <motion.div variants={lineVariants} className="text-brand-red animate-text-pulse select-none cursor-default">
             {text2}
           </motion.div>
         </motion.h1>

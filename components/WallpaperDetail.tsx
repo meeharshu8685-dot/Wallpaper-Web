@@ -35,7 +35,7 @@ const WallpaperDetail: React.FC<WallpaperDetailProps> = ({ wallpaper, onClose })
       transition: { duration: 0.3, ease: 'easeOut' },
     },
   };
-  
+
   const handleDownload = () => {
     const link = document.createElement('a');
     link.href = wallpaper.resolutions[resolution];
@@ -55,15 +55,15 @@ const WallpaperDetail: React.FC<WallpaperDetailProps> = ({ wallpaper, onClose })
       initial="hidden"
       animate="visible"
       exit="exit"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black md:bg-black/90 md:backdrop-blur-md"
       onClick={onClose}
     >
       <motion.div
         variants={modalVariants}
-        className="relative flex h-full w-full flex-col items-center justify-center p-4 md:h-auto md:w-auto md:flex-row md:gap-8"
+        className="relative flex h-full w-full flex-col items-center p-0 md:p-4 md:h-auto md:w-auto md:flex-row md:gap-8 overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className={`relative aspect-[9/16] h-[70vh] max-h-[800px] overflow-hidden rounded-lg ${wallpaper.isPremium ? 'shadow-[0_0_35px_rgba(212,175,55,0.5)]' : ''}`}>
+        <div className={`relative aspect-[9/16] w-full md:h-[70vh] md:max-h-[800px] overflow-hidden md:rounded-lg ${wallpaper.isPremium ? 'shadow-[0_0_35px_rgba(212,175,55,0.5)]' : ''}`}>
           <img
             src={wallpaper.resolutions[resolution]}
             alt={wallpaper.title}
@@ -71,16 +71,16 @@ const WallpaperDetail: React.FC<WallpaperDetailProps> = ({ wallpaper, onClose })
           />
         </div>
 
-        <div className="mt-4 flex w-full max-w-sm flex-col space-y-6 md:mt-0 md:w-80">
-          <div className="text-center md:text-left">
-            <h2 className="font-heading text-4xl tracking-wider text-white">{wallpaper.title}</h2>
-            <div className="mt-2 flex justify-center gap-2 md:justify-start">
+        <div className="mt-4 flex w-full max-w-sm flex-col space-y-6 md:mt-0 md:w-80 px-6 pb-20 md:px-0 md:pb-0">
+          <div className="text-left">
+            <h2 className="font-heading text-4xl tracking-wider text-white uppercase">{wallpaper.title}</h2>
+            <div className="mt-2 flex flex-wrap gap-2">
               {wallpaper.tags.map(tag => (
-                  <span key={tag} className="rounded-full bg-white/10 px-3 py-1 text-xs text-gray-300">{tag}</span>
+                <span key={tag} className="rounded border border-white/20 bg-white/5 px-2 py-0.5 text-[10px] uppercase tracking-tighter text-gray-300">#{tag}</span>
               ))}
             </div>
           </div>
-          
+
           <div className="space-y-3">
             <h3 className="font-mono text-sm text-gray-400">RESOLUTION</h3>
             <div className="grid grid-cols-3 gap-2 rounded-lg bg-white/10 p-1">
@@ -95,10 +95,10 @@ const WallpaperDetail: React.FC<WallpaperDetailProps> = ({ wallpaper, onClose })
               ))}
             </div>
           </div>
-          
+
           <div className="space-y-3">
-             {wallpaper.isPremium ? (
-              <motion.button 
+            {wallpaper.isPremium ? (
+              <motion.button
                 whileHover={{ scale: 1.05, ...glowStyle('rgba(212,175,55,0.7)') }}
                 whileTap={{ scale: 0.95 }}
                 className="flex w-full items-center justify-center gap-2 rounded-lg bg-brand-gold py-3 px-4 font-bold text-black animate-pulse-slow shadow-lg shadow-brand-gold/20 transition-shadow"
@@ -107,7 +107,7 @@ const WallpaperDetail: React.FC<WallpaperDetailProps> = ({ wallpaper, onClose })
                 UNLOCK PREMIUM
               </motion.button>
             ) : (
-              <motion.button 
+              <motion.button
                 onClick={handleDownload}
                 whileHover={{ scale: 1.05, ...glowStyle('rgba(185,28,28,0.7)') }}
                 whileTap={{ scale: 0.95 }}
@@ -117,7 +117,7 @@ const WallpaperDetail: React.FC<WallpaperDetailProps> = ({ wallpaper, onClose })
                 DOWNLOAD
               </motion.button>
             )}
-            <motion.button 
+            <motion.button
               whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(255,255,255,0.2)' }}
               whileTap={{ scale: 0.95 }}
               className="flex w-full items-center justify-center gap-2 rounded-lg bg-white/10 py-3 px-4 font-bold text-white transition-shadow"
@@ -128,8 +128,11 @@ const WallpaperDetail: React.FC<WallpaperDetailProps> = ({ wallpaper, onClose })
           </div>
         </div>
 
-        <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 transition-all hover:text-white hover:scale-110">
-          <CloseIcon className="h-8 w-8" />
+        <button
+          onClick={onClose}
+          className="absolute top-4 left-4 z-10 h-10 w-10 flex items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-md border border-white/10 transition-all active:scale-95"
+        >
+          <CloseIcon className="h-6 w-6" />
         </button>
       </motion.div>
     </motion.div>

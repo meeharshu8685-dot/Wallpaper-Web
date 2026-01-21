@@ -11,18 +11,38 @@ import Premium from './components/Premium';
 import About from './components/About';
 import WallpaperDetail from './components/WallpaperDetail';
 import LiveBackground from './components/LiveBackground';
+import { MobileHeader, MobileNavbar } from './components/MobileNav';
 
 const App: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const [selectedWallpaper, setSelectedWallpaper] = useState<Wallpaper | null>(null);
   const wallpaperGridRef = useRef<HTMLDivElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [activeTab, setActiveTab] = useState('home');
+  const heroRef = useRef<HTMLDivElement>(null);
+  const categoriesRef = useRef<HTMLDivElement>(null);
+  const premiumRef = useRef<HTMLDivElement>(null);
+  const aboutRef = useRef<HTMLDivElement>(null);
 
   const handleSelectCategory = (category: Category | null) => {
     setSelectedCategory(category);
     setTimeout(() => {
       wallpaperGridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    setActiveTab(sectionId);
+    const refs: Record<string, React.RefObject<HTMLDivElement>> = {
+      home: heroRef,
+      categories: categoriesRef,
+      premium: premiumRef,
+      about: aboutRef,
+    };
+
+    const targetRef = refs[sectionId];
+    if (targetRef?.current) {
+      targetRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   const filteredWallpapers = selectedCategory
@@ -50,10 +70,13 @@ const App: React.FC = () => {
   return (
     <>
       <LiveBackground mousePosition={mousePosition} />
-      <div className="relative z-10 isolate min-h-screen w-full overflow-x-hidden" style={{ perspective: '1000px' }}>
-        <Hero />
+      <MobileHeader />
+      <div className="relative z-10 isolate min-h-screen w-full overflow-x-hidden pb-20 md:pb-0" style={{ perspective: '1000px' }}>
+        <div ref={heroRef}><Hero /></div>
         <CultureStatement />
-        <Categories categories={categories} onSelectCategory={handleSelectCategory} selectedCategory={selectedCategory} />
+        <div ref={categoriesRef}>
+          <Categories categories={categories} onSelectCategory={handleSelectCategory} selectedCategory={selectedCategory} />
+        </div>
         <div ref={wallpaperGridRef} className="pt-12">
           <WallpaperGrid
             key={selectedCategory?.id || 'all'}
@@ -62,8 +85,8 @@ const App: React.FC = () => {
             title={selectedCategory ? selectedCategory.name : "All Wallpapers"}
           />
         </div>
-        <Premium />
-        <About />
+        <div ref={premiumRef}><Premium /></div>
+        <div ref={aboutRef}><About /></div>
 
         <AnimatePresence>
           {selectedWallpaper && (
@@ -74,6 +97,7 @@ const App: React.FC = () => {
           )}
         </AnimatePresence>
       </div>
+      <MobileNavbar activeTab={activeTab} setActiveTab={scrollToSection} />
     </>
   );
 };
