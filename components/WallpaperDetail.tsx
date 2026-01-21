@@ -111,10 +111,16 @@ const WallpaperDetail: React.FC<WallpaperDetailProps> = ({ wallpaper, onClose })
                 onClick={handleDownload}
                 whileHover={{ scale: 1.05, ...glowStyle('rgba(185,28,28,0.7)') }}
                 whileTap={{ scale: 0.95 }}
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-brand-red py-3 px-4 font-bold text-white shadow-lg shadow-brand-red/20 transition-shadow"
+                className="relative overflow-hidden flex w-full items-center justify-center gap-2 rounded-lg bg-brand-red py-3 px-4 font-bold text-white shadow-lg shadow-brand-red/20 transition-shadow"
               >
-                <DownloadIcon className="h-5 w-5" />
-                DOWNLOAD
+                <DownloadIcon className="h-5 w-5 z-10" />
+                <span className="z-10 text-xs">DOWNLOAD NOW</span>
+                <div className="absolute inset-0 opacity-20">
+                  <LottieAnimation
+                    url="https://lottie.host/88169623-2882-498c-8438-232cc2e88242/fUOnb2DWhx.json"
+                    className="absolute inset-0 h-full w-full scale-150"
+                  />
+                </div>
               </motion.button>
             )}
             <motion.button

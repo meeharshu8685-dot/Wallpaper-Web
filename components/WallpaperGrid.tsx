@@ -58,11 +58,17 @@ const WallpaperCard: React.FC<WallpaperCardProps> = ({ wallpaper, onSelect }) =>
       <img
         src={wallpaper.imageUrl}
         alt={wallpaper.title}
-        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[0.2] group-hover:grayscale-0"
-        style={{ filter: 'brightness(0.7)' }}
+        className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale-[0.5] group-hover:grayscale-0"
+        style={{ filter: 'brightness(0.6)' }}
         loading="lazy"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-100"></div>
+
+      <motion.div
+        initial={false}
+        whileHover={{ opacity: 1 }}
+        className="absolute inset-0 pointer-events-none border-2 border-brand-red opacity-0 transition-opacity duration-300"
+      />
 
       <div className="absolute inset-0 flex flex-col justify-end p-6 translate-z-10 opacity-0 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0 translate-y-4">
         <h4 className="mb-2 font-heading text-lg tracking-wider text-white group-hover:animate-glitch">{wallpaper.title}</h4>
