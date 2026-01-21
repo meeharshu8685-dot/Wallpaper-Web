@@ -18,6 +18,7 @@ const App: React.FC = () => {
   const [selectedWallpaper, setSelectedWallpaper] = useState<Wallpaper | null>(null);
   const wallpaperGridRef = useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState('home');
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const heroRef = useRef<HTMLDivElement>(null);
   const categoriesRef = useRef<HTMLDivElement>(null);
   const premiumRef = useRef<HTMLDivElement>(null);
