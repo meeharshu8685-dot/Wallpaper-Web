@@ -12,6 +12,7 @@ import About from './components/About';
 import WallpaperDetail from './components/WallpaperDetail';
 import LiveBackground from './components/LiveBackground';
 import { MobileHeader, MobileNavbar } from './components/MobileNav';
+import CapsuleNavbar from './components/CapsuleNavbar';
 
 const App: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
@@ -72,6 +73,7 @@ const App: React.FC = () => {
     <>
       <LiveBackground mousePosition={mousePosition} />
       <MobileHeader />
+      <CapsuleNavbar activeTab={activeTab} setActiveTab={scrollToSection} />
       <div className="relative z-10 isolate min-h-screen w-full overflow-x-hidden pb-20 md:pb-0" style={{ perspective: '1000px' }}>
         <div ref={heroRef}><Hero /></div>
         <CultureStatement />

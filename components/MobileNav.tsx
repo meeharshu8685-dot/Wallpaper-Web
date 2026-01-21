@@ -10,7 +10,7 @@ export const MobileHeader: React.FC = () => {
                 <div className="h-8 w-8 bg-brand-red rounded flex items-center justify-center">
                     <span className="font-heading text-xl text-white">S</span>
                 </div>
-                <h1 className="font-heading text-xl tracking-tighter text-white">STRAIGHT OUTTA <span className="text-brand-red">DHH</span></h1>
+                <h1 className="font-heading text-base sm:text-xl tracking-tighter text-white truncate">STRAIGHT OUTTA <span className="text-brand-red">DHH</span></h1>
             </div>
             <button className="h-10 w-10 rounded-full bg-white/5 flex items-center justify-center">
                 <div className="flex flex-col gap-1">

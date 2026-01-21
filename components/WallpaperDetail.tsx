@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import type { Wallpaper } from '../types';
 import { CloseIcon, DownloadIcon, LockIcon, ShareIcon } from './icons';
+import LottieAnimation from './LottieAnimation';
 
 interface WallpaperDetailProps {
   wallpaper: Wallpaper;
@@ -73,7 +74,7 @@ const WallpaperDetail: React.FC<WallpaperDetailProps> = ({ wallpaper, onClose })
 
         <div className="mt-4 flex w-full max-w-sm flex-col space-y-6 md:mt-0 md:w-80 px-6 pb-20 md:px-0 md:pb-0">
           <div className="text-left">
-            <h2 className="font-heading text-4xl tracking-wider text-white uppercase">{wallpaper.title}</h2>
+            <h2 className="font-heading text-2xl sm:text-4xl tracking-wider text-white uppercase">{wallpaper.title}</h2>
             <div className="mt-2 flex flex-wrap gap-2">
               {wallpaper.tags.map(tag => (
                 <span key={tag} className="rounded border border-white/20 bg-white/5 px-2 py-0.5 text-[10px] uppercase tracking-tighter text-gray-300">#{tag}</span>

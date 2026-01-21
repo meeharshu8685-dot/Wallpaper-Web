@@ -86,7 +86,7 @@ const Hero: React.FC = () => {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="font-heading text-5xl tracking-widest text-gray-100 md:text-8xl lg:text-9xl animate-bass-scale px-4 leading-none"
+            className="font-heading text-[10vw] sm:text-5xl md:text-8xl lg:text-9xl tracking-widest text-gray-100 animate-bass-scale px-4 leading-none"
           >
             <motion.div variants={lineVariants} className="hover:animate-glitch select-none cursor-default mb-4 break-words">
               {SLOGANS[currentIndex].text1}
